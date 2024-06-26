@@ -193,7 +193,14 @@ uint16_t tinyESPNow::send(void) {
   delay(ESPNOW_SEND_DELAY);
   resultCheck(-1, result);
 }
-
+// added to simply API
+uint16_t tinyESPNow::send(uint8_t *dt, uint32_t cnt) {
+  put(dt, cnt);
+  esp_err_t result;
+  result = esp_now_send(_slave.peer_addr, __transAry, __sendOffset);
+  delay(ESPNOW_SEND_DELAY);
+  resultCheck(-1, result);
+}
 //======================================
 // update
 //--------------------------------------
